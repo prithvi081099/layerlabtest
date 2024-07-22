@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My handy dandy simple bitmap library, in C | Layer Lab</title>
+<meta name="generator" content="Jekyll v3.6.3" />
+<meta property="og:title" content="My handy dandy simple bitmap library, in C" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Bitmaps are incredibly handy data structures, and everyone should have one in their back pocket. If you don’t have one, feel free to use mine. Feel free to offer improvements to mine." />
+<meta property="og:description" content="Bitmaps are incredibly handy data structures, and everyone should have one in their back pocket. If you don’t have one, feel free to use mine. Feel free to offer improvements to mine." />
+<link rel="canonical" href="/2018/06/07/My-bitmap.html" />
+<meta property="og:url" content="/2018/06/07/My-bitmap.html" />
+<meta property="og:site_name" content="Layer Lab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"My handy dandy simple bitmap library, in C","dateModified":"2018-06-07T00:00:00-06:00","datePublished":"2018-06-07T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"/2018/06/07/My-bitmap.html"},"description":"Bitmaps are incredibly handy data structures, and everyone should have one in their back pocket. If you don’t have one, feel free to use mine. Feel free to offer improvements to mine.","url":"/2018/06/07/My-bitmap.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Layer Lab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56403324-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">Layer Lab</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/join_us/">Join Us</a>
+            
+          
+            
+            
+            <a class="page-link" href="/people/">People</a>
+            
+          
+            
+            
+            <a class="page-link" href="/Publications/">Publications</a>
+            
+          
+            
+            
+            <a class="page-link" href="/software/">Software</a>
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">My handy dandy simple bitmap library, in C</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-06-07T00:00:00-06:00" itemprop="datePublished">Jun 7, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Bitmaps are incredibly handy data structures, and everyone should have one in
+their back pocket. If you don’t have one, feel free to use mine. Feel free to
+offer improvements to mine.</p>
+
+<p>https://github.com/ryanlayer/cs/tree/master/bitmap</p>
+
+<p>Many others have developed methods that probably perform better and have more
+features. My intent is mostly educational. I will try to keep a running list
+here:</p>
+<ul>
+  <li>https://github.com/attractivechaos/klib/pull/59 h/t <a href="https://twitter.com/jomarnz">@jomarnz</a></li>
+  <li>https://github.com/lemire/cbitset h/t <a href="https://twitter.com/brent_p">@brent_p</a></li>
+</ul>
+
+<p>The most straight-forward way to implement a bitmap is with an array of
+unsigned ints. Here I  use 32-bits. Once you have your bag of bits, you need to
+pick the ‘endianness’ of your map, which defines the order bits are stored in.
+You can put the first bit, <code class="highlighter-rouge">b[0]</code>, on the LITTLE end (little-endian) like so:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 0 0 0 0 0 0 1
+</code></pre></div></div>
+<p>or on the BIG end (big-endian) like so:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 0 0 0 0 0 0 0
+</code></pre></div></div>
+
+<p>I use big-endian because, well I don’t know why. Maybe when I was debugging
+this it made more sense when I printed out the bits in big-endian. It doesn’t
+really matter, as long as your bit shifts for getting and setting agree.</p>
+
+<p>To set a bit <code class="highlighter-rouge">i</code>, you divided by 32 to get to the element of the array
+containing that bit then OR that element with a 1 that has has been shifted.
+The MOD gives the local position of that bit in the element and I subtract that
+from 31 to put it on the big end.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b[i/32] |= 1 &lt;&lt; (31 - (i%32));
+</code></pre></div></div>
+<p>You might think that the 31 above should be a 32 because, you know, 32-bits.
+Consider when <code class="highlighter-rouge">i = 0</code>, which would be <code class="highlighter-rouge">1 &lt;&lt; (32 - 0 ) = 4294967296</code>. 4294967295
+is the max value for an unsigned 32-bit int, so 4294967296 would require 33
+bits.
+Overflow.</p>
+
+<p>To get the bit you jump to the element in the same way, then shift that value
+over until <code class="highlighter-rouge">i</code> is at the least significant bit, then AND that value with 1 to
+mask out any trailing bits.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b[i/32]) &gt;&gt; (31 - (i%32)) &amp; 1)
+</code></pre></div></div>
+
+<p>To make things easier, my bitmap tracks the number of bits in the map and the
+number of ints needed to represent those bits. This allows me to grow the map
+dynamically. If you want to set a bit that is outside the current range, I grow
+the array exponentially until the bit fits. If you want to get a bit that is
+outside the current range I just return zero instead of growing the map.  There
+are also functions to save and load maps from disk.</p>
+
+<p>Start by initializing the bitmap with some starting size, this can be just a
+guess on how big it will bet but don’t worry if it is too small, the map will
+grow as needed. Then set and get to your heart’s content. When you are done you
+can save it for later or just destroy it. If you do have a saved map, then load
+it and you are good to go.</p>
+
+<p>Obvious additions to the library are bitwise operations (AND, OR, etc.),
+compressed storage, and on-demand loading from disk.</p>
+
+<h1 id="tldr">TL;DR</h1>
+
+<p>Function singnatures:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">bit_map_init</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">bits</span><span class="p">);</span>
+<span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">bit_map_load</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">file_name</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">bit_map_store</span><span class="p">(</span><span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file_name</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">bit_map_destroy</span><span class="p">(</span><span class="k">struct</span> <span class="n">bit_map</span> <span class="o">**</span><span class="n">b</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">bit_map_set</span><span class="p">(</span><span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">i</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">q</span><span class="p">);</span></code></pre></figure>
+
+<p>A sample program:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include "bitmap.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">uint64_t</span> <span class="n">starting_size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+
+    <span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">bit_map_init</span><span class="p">(</span><span class="n">starting_size</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[0]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[0] = 1</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">bit_map_set</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[0]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[1000] = 1</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">bit_map_set</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[999]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">999</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[1000]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"b[9000]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">9000</span><span class="p">));</span>
+
+    <span class="n">bit_map_store</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s">"bitmap.data"</span><span class="p">);</span>
+
+    <span class="n">bit_map_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="k">struct</span> <span class="n">bit_map</span> <span class="o">*</span><span class="n">d</span> <span class="o">=</span> <span class="n">bit_map_load</span><span class="p">(</span><span class="s">"bitmap.data"</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"d[0]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"d[999]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">999</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"d[1000]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">1000</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"d[9000]: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bit_map_get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">9000</span><span class="p">));</span>
+
+    <span class="n">bit_map_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Program output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b[0]: 0
+b[0] = 1
+b[0]: 1
+b[1000] = 1
+b[999]: 0
+b[1000]: 1
+b[9000]: 0
+d[0]: 1
+d[999]: 0
+d[1000]: 1
+d[9000]: 0
+</code></pre></div></div>
+
+  </div> 
+  <div id="disqus_thread"></div>
+  <script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+  (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://layerlab.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+  
+
+  <a class="u-url" href="/2018/06/07/My-bitmap.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Layer Lab</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Layer Lab</li><li><a class="u-email" href="mailto:web@layerlab.org">web@layerlab.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">ryanlayer</span></a></li><li><a href="https://www.twitter.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">ryanlayer</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developing algorithms for large-scale genomics at CU Boulder Computer Science and Biofrontiers Institute. Make science faster.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

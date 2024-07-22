@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Samplot Improvements: Split View / SV Browser | Layer Lab</title>
+<meta name="generator" content="Jekyll v3.6.3" />
+<meta property="og:title" content="Samplot Improvements: Split View / SV Browser" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Source code" />
+<meta property="og:description" content="Source code" />
+<link rel="canonical" href="/2019/06/04/Samplot-improvement.html" />
+<meta property="og:url" content="/2019/06/04/Samplot-improvement.html" />
+<meta property="og:site_name" content="Layer Lab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-04T00:00:00-06:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Samplot Improvements: Split View / SV Browser","dateModified":"2019-06-04T00:00:00-06:00","datePublished":"2019-06-04T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"/2019/06/04/Samplot-improvement.html"},"description":"Source code","url":"/2019/06/04/Samplot-improvement.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Layer Lab" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56403324-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">Layer Lab</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/join_us/">Join Us</a>
+            
+          
+            
+            
+            <a class="page-link" href="/people/">People</a>
+            
+          
+            
+            
+            <a class="page-link" href="/Publications/">Publications</a>
+            
+          
+            
+            
+            <a class="page-link" href="/software/">Software</a>
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Samplot Improvements: Split View / SV Browser</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-06-04T00:00:00-06:00" itemprop="datePublished">Jun 4, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://github.com/ryanlayer/samplot">Source code</a></p>
+
+<p>We have made two major updates to Samplot</p>
+<h2 id="1-split-view">1. Split view</h2>
+
+<p>The original version of samplot visualized one continuous genomic region, which
+made viewing translocations impossible and large SVs difficult and
+time-consuming. By providing support for two areas, we can now plot the two
+ends of a translocation and zoom into the breakpoints of large SVs.</p>
+
+<p>Here is the chromosome 2/X inverted translocation that we identified in a
+patient with early infantile epileptic encephalopathy (EIEE) [BE Ostrander et
+al., Genomic Medicine 2018]. Notice the break in the middle that is indicated
+by an ellipsis in the SV plot on top and whitespace in the sample plot. Split
+view support has also been extended to annotation and transcript plots, as seen
+below.</p>
+
+<center><img src="/assets/2019-06-04-Samplot-improvement/translocation.png" height="300px" /></center>
+
+<p>This plot is generated by providing 2 sets of chromosomal positions and using
+the <code class="highlighter-rouge">--zoom</code> parameter to specify the size of the flanking regions.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python samplot.py \
+    -c 2 -s 59405943 -e 59405943 \
+    -c X -s 151118533 -e 151118533 \
+    -b samplot/test/data/2_59305747-59505747_X_151018513-151218513.BND.bam
+    -o translocation.png \
+    -t BND \
+    --zoom 10000
+</code></pre></div></div>
+
+<p>Here are the original and zoomed plots for a 45Kb deletion in HG002 sample from
+the GIAB Ashkenazim Trio. The full plot took four seconds to complete and the
+zoom took one second.</p>
+
+<center><img src="/assets/2019-06-04-Samplot-improvement/big.png" height="300px" /></center>
+<center><img src="/assets/2019-06-04-Samplot-improvement/big_zoom.png" height="300px" /></center>
+
+<p>Generating a zoomed plot is straightforward, add the <code class="highlighter-rouge">--zoom</code> parameter:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python samplot.py \
+    -c 1 -s 72766323 -e 72811839 \
+    -b HG002.hs37d5.2x250.bam \
+    -o big_zoom.png \
+    -t DEL \
+    -d 10 \
+    --zoom 1000
+</code></pre></div></div>
+<h2 id="2-sv-vcf-browser">2. SV VCF browser</h2>
+
+<p>Given a VCF with SVs and the sample BAMs, run <code class="highlighter-rouge">samplot_vcf.py</code> to generate the
+variants plots and a web page that provides an interface to browse the plots.
+For example, the SVs in <code class="highlighter-rouge">samplot/test/data/test.vcf</code> produce the following
+site.  Basic information about the SVs is given in each row, and an SV plot can
+be displayed below by clicking on the row.</p>
+
+<p>We have many improvemtns planned for this interface, so stay tuned.</p>
+
+<center>
+<iframe width="700" height="1000" src="/assets/2019-06-04-Samplot-improvement/test_suite/index.html" frameborder="0"></iframe>
+</center>
+
+<p>The command to produce this site is:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    python ../../src/samplot_vcf.py \
+        -d output_dir \
+        --vcf test.vcf \
+        --sample_ids HG002 HG003 HG004 \
+        -b ../data/HG002_Illumina.bam \
+        ../data/HG003_Illumina.bam \
+        ../data/HG004_Illumina.bam \
+        --command_file samplot_commands.sh
+</code></pre></div></div>
+<p>This command will create the directory <code class="highlighter-rouge">output_dir</code>, <code class="highlighter-rouge">output_dir/index.html</code>,
+and <code class="highlighter-rouge">samplot_commands.sh</code> which contains the commands needed to generate the
+samplot images. Run <code class="highlighter-rouge">bash samplot_commands.sh</code> and the plots will be placed
+into <code class="highlighter-rouge">output_dir</code>, and begin browsing.</p>
+
+<p>See the <a href="https://github.com/ryanlayer/samplot">samplot page</a>
+for the full documentation.</p>
+
+  </div> 
+  <div id="disqus_thread"></div>
+  <script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+  (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://layerlab.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+  
+
+  <a class="u-url" href="/2019/06/04/Samplot-improvement.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Layer Lab</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Layer Lab</li><li><a class="u-email" href="mailto:web@layerlab.org">web@layerlab.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">ryanlayer</span></a></li><li><a href="https://www.twitter.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">ryanlayer</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developing algorithms for large-scale genomics at CU Boulder Computer Science and Biofrontiers Institute. Make science faster.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
