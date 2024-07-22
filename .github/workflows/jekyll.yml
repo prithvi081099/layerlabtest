@@ -16,10 +16,14 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: 3.1 # Updated Ruby version to 3.1
+
+    - name: Update RubyGems
+      run: gem update --system # Update RubyGems to the latest version
 
     - name: Install Jekyll and Bundler
-      run: gem install jekyll bundler
+      run: |
+        gem install jekyll bundler
 
     - name: Install dependencies
       run: bundle install
@@ -32,3 +36,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
+        publish_branch: gh-pages
