@@ -2,33 +2,25 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Manual and automated structural variant curation with samplot and samplot-ml | Layer Lab</title>
-<meta name="generator" content="Jekyll v3.6.3" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Manual and automated structural variant curation with samplot and samplot-ml" />
+<meta name="author" content="Layer Lab" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Structural variant (SV) callers, in order to maximize sensitivity, tend to suffer from high false positive rates. We have shown that it is possible to spot false positive SV calls using Samplot visualizations, but manual curation of large SV callsets can be a long and tedious process. To that end we developed Samplot-ML to discriminate between true and false positive deletion SVs." />
 <meta property="og:description" content="Structural variant (SV) callers, in order to maximize sensitivity, tend to suffer from high false positive rates. We have shown that it is possible to spot false positive SV calls using Samplot visualizations, but manual curation of large SV callsets can be a long and tedious process. To that end we developed Samplot-ML to discriminate between true and false positive deletion SVs." />
-<link rel="canonical" href="/2021/06/09/SV-curration-with-Samplot.html" />
-<meta property="og:url" content="/2021/06/09/SV-curration-with-Samplot.html" />
+<link rel="canonical" href="http://localhost:4000/2021/06/09/SV-curration-with-Samplot.html" />
+<meta property="og:url" content="http://localhost:4000/2021/06/09/SV-curration-with-Samplot.html" />
 <meta property="og:site_name" content="Layer Lab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-09T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Manual and automated structural variant curation with samplot and samplot-ml" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Manual and automated structural variant curation with samplot and samplot-ml","dateModified":"2021-06-09T00:00:00-06:00","datePublished":"2021-06-09T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/06/09/SV-curration-with-Samplot.html"},"description":"Structural variant (SV) callers, in order to maximize sensitivity, tend to suffer from high false positive rates. We have shown that it is possible to spot false positive SV calls using Samplot visualizations, but manual curation of large SV callsets can be a long and tedious process. To that end we developed Samplot-ML to discriminate between true and false positive deletion SVs.","url":"/2021/06/09/SV-curration-with-Samplot.html","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Layer Lab"},"dateModified":"2021-06-09T00:00:00-06:00","datePublished":"2021-06-09T00:00:00-06:00","description":"Structural variant (SV) callers, in order to maximize sensitivity, tend to suffer from high false positive rates. We have shown that it is possible to spot false positive SV calls using Samplot visualizations, but manual curation of large SV callsets can be a long and tedious process. To that end we developed Samplot-ML to discriminate between true and false positive deletion SVs.","headline":"Manual and automated structural variant curation with samplot and samplot-ml","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/06/09/SV-curration-with-Samplot.html"},"url":"http://localhost:4000/2021/06/09/SV-curration-with-Samplot.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Layer Lab" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56403324-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Layer Lab" />
 </head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
@@ -50,9 +42,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
         </label>
 
         <div class="trigger">
-          
-            
-            
           
             
             
@@ -80,12 +69,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
             
             
             <a class="page-link" href="/software/">Software</a>
-            
-          
-            
-            
-          
-            
             
           
         </div>
@@ -134,25 +117,25 @@ data from the 1000 genomes project (1kg).</p>
 
 <ol>
   <li>Download a CRAM file from 1kg’s ftp
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR324/ERR3242876/HG03687.final.cram
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR324/ERR3242876/HG03687.final.cram
 $ wget ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR324/ERR3242876/HG03687.final.cram.crai
 </code></pre></div>    </div>
   </li>
   <li>Get the reference genome
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
 $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
 </code></pre></div>    </div>
   </li>
   <li>Get a set of exclude regions in bed format for use during SV calling
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget https://raw.githubusercontent.com/hall-lab/speedseq/master/annotations/exclude.cnvnator_100bp.GRCh38.20170403.bed
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget https://raw.githubusercontent.com/hall-lab/speedseq/master/annotations/exclude.cnvnator_100bp.GRCh38.20170403.bed
 </code></pre></div>    </div>
   </li>
   <li>Install smoove with conda
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create -c bioconda -n smoove smoove
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create -c bioconda -n smoove smoove
 </code></pre></div>    </div>
   </li>
   <li>Call SVs
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda activate smoove
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda activate smoove
 $ smoove call -x \
  --name HG03687 \
  --exclude $exclude_bed \
@@ -164,18 +147,18 @@ $ smoove call -x \
   </li>
 </ol>
 
-<p>The resulting vcf will be <code class="highlighter-rouge">$outdir/HG003687-smoove.genotyped.vcf.gz</code>.</p>
+<p>The resulting vcf will be <code class="language-plaintext highlighter-rouge">$outdir/HG003687-smoove.genotyped.vcf.gz</code>.</p>
 
 <ol>
   <li>
     <p>Clone the Samplot-ML git repo</p>
   </li>
   <li>
-    <p>Next, let’s edit the config file located at <code class="highlighter-rouge">samplot-ml/workflows/samplot-ml-predict.yaml</code></p>
+    <p>Next, let’s edit the config file located at <code class="language-plaintext highlighter-rouge">samplot-ml/workflows/samplot-ml-predict.yaml</code></p>
   </li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samples:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samples:
 	HG03687: "/path/to/cram" # or you can use "s3://bucket/bam_or_cram" if you've got alignments in an s3 bucket.
 fasta:
 	data_source: "local" # either local or s3
@@ -196,7 +179,7 @@ outdir: "/path/to/output_directory"
 
 <ol>
   <li>Run the prediction snakefile located at samplot-ml/workflows/samplot-ml-predict.smk
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate snakemake
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate snakemake
 snakemake -s samplot-ml-predict.smk \
        -j $num_threads \ # number of parallel threads to use to execute jobs
        --use-conda --conda-fronend mamba # this allows snakemake to handle dependencies
@@ -205,9 +188,9 @@ snakemake -s samplot-ml-predict.smk \
 </ol>
 
 <p>Generated images of DEL regions from the input VCF will be located at
-<code class="highlighter-rouge">$outdir/img/</code> each image will be named <code class="highlighter-rouge">${contig}-${start}-${end}-DEL.png</code>. An
+<code class="language-plaintext highlighter-rouge">$outdir/img/</code> each image will be named <code class="language-plaintext highlighter-rouge">${contig}-${start}-${end}-DEL.png</code>. An
 annotated vcf containing the Samplot-ML predictions will be located at
-<code class="highlighter-rouge">$outdir/samplot-ml-results/HG03687-samplot-ml.vcf.gz</code></p>
+<code class="language-plaintext highlighter-rouge">$outdir/samplot-ml-results/HG03687-samplot-ml.vcf.gz</code></p>
 
 <h3 id="vcf-annotations">VCF annotations</h3>
 
@@ -228,13 +211,13 @@ SV callset.</li>
 
 <p>Now that we’ve got our annotated VCF, let’s inspect one of the predictions and
 compare it with the samplot image.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># get the first DEL region from the vcf.  Print out the filename of the
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># get the first DEL region from the vcf.  Print out the filename of the
 # samplot image, the original genotype and the samplot-ml predicted genotype.
 $ bcftools query -i 'SVTYPE="DEL"' -f '%CHROM-%POS-%INFO/END-[%SAMPLE].png\t[%OLDGT\t%GT]\n' HG03687-samplot-ml.vcf.gz | head -1
 </code></pre></div></div>
 <p>output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr1-934098-934868-HG03687.png	0/1	1/1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr1-934098-934868-HG03687.png	0/1	1/1
 </code></pre></div></div>
 
 <p>It seems that in the very first deletion we came across, there was a difference between SVTyper’s prediction and Samplot-ML’s prediction. We went from a heterozygous deletion (0/1) to a homozygous alternate deletion (1/1). Let’s take a look at the image in question.</p>
@@ -252,24 +235,43 @@ $ bcftools query -i 'SVTYPE="DEL"' -f '%CHROM-%POS-%INFO/END-[%SAMPLE].png\t[%OL
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Layer Lab</h2>
-
     <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
+      <!-- First column with Layer Lab title -->
+      <div class="footer-col">
+        <p class="p-name">Layer Lab</p>
         <ul class="contact-list">
-          <li class="p-name">Layer Lab</li><li><a class="u-email" href="mailto:web@layerlab.org">web@layerlab.org</a></li></ul>
+          <li class="p-name">Layer Lab</li>
+          <li><a class="u-email" href="mailto:"></a></li>
+        </ul>
       </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">ryanlayer</span></a></li><li><a href="https://www.twitter.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">ryanlayer</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Developing algorithms for large-scale genomics at CU Boulder Computer Science and Biofrontiers Institute. Make science faster.</p>
+      
+      <!-- Second column with social links and description -->
+      <div class="footer-col">
+        <ul class="social-links">
+          <li>
+            <a href="https://github.com/ryanlayer">
+              <svg class="svg-icon">
+                <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+              </svg>
+              <span>ryanlayer</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/ryanlayer">
+              <svg class="svg-icon">
+                <use xlink:href="/assets/minima-social-icons.svg#twitter"></use>
+              </svg>
+              <span>ryanlayer</span>
+            </a>
+          </li>
+        </ul>
+        <p>Developing algorithms for large-scale genomics at CU Boulder Computer
+  Science and Biofrontiers Institute. Make science faster.
+</p>
       </div>
     </div>
 
   </div>
-
 </footer>
 </body>
 

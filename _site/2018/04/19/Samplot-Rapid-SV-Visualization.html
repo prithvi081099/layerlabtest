@@ -2,33 +2,25 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Samplot: Rapid SV Visualization | Layer Lab</title>
-<meta name="generator" content="Jekyll v3.6.3" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Samplot: Rapid SV Visualization" />
+<meta name="author" content="Layer Lab" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Source code" />
 <meta property="og:description" content="Source code" />
-<link rel="canonical" href="/2018/04/19/Samplot-Rapid-SV-Visualization.html" />
-<meta property="og:url" content="/2018/04/19/Samplot-Rapid-SV-Visualization.html" />
+<link rel="canonical" href="http://localhost:4000/2018/04/19/Samplot-Rapid-SV-Visualization.html" />
+<meta property="og:url" content="http://localhost:4000/2018/04/19/Samplot-Rapid-SV-Visualization.html" />
 <meta property="og:site_name" content="Layer Lab" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-04-19T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Samplot: Rapid SV Visualization" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Samplot: Rapid SV Visualization","dateModified":"2018-04-19T00:00:00-06:00","datePublished":"2018-04-19T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"/2018/04/19/Samplot-Rapid-SV-Visualization.html"},"description":"Source code","url":"/2018/04/19/Samplot-Rapid-SV-Visualization.html","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Layer Lab"},"dateModified":"2018-04-19T00:00:00-06:00","datePublished":"2018-04-19T00:00:00-06:00","description":"Source code","headline":"Samplot: Rapid SV Visualization","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/04/19/Samplot-Rapid-SV-Visualization.html"},"url":"http://localhost:4000/2018/04/19/Samplot-Rapid-SV-Visualization.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Layer Lab" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56403324-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Layer Lab" />
 </head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
@@ -50,9 +42,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
         </label>
 
         <div class="trigger">
-          
-            
-            
           
             
             
@@ -80,12 +69,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
             
             
             <a class="page-link" href="/software/">Software</a>
-            
-          
-            
-            
-          
-            
             
           
         </div>
@@ -133,7 +116,7 @@ samples.</p>
 <p>This gets even worse if I want to look at MANY SVs. That is a lot more
 clicking, re-sorting, and scanning. To make matters worse, what if the BAMs are
 not on my local machine or even a local server? Whate if the BAMs are in the
-cloud or on a collaborator’s cluster where <code class="highlighter-rouge">ssh -X</code> is just not going to cut it.</p>
+cloud or on a collaborator’s cluster where <code class="language-plaintext highlighter-rouge">ssh -X</code> is just not going to cut it.</p>
 
 <p>To address this case we developed samplot. A command line tool that takes SV
 coordinates and bam files and produces high-quality images that highlight
@@ -144,10 +127,10 @@ for the same samples from samplot.</p>
 
 <p>To get this image you need to:
 Get the code:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ryanlayer/samplot.git
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ryanlayer/samplot.git
 </code></pre></div></div>
 <p>Get the annotations:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget ftp://ftp.ensembl.org/pub/grch37/release-84/gff3/homo_sapiens/Homo_sapiens.GRCh37.82.gff3.gz
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget ftp://ftp.ensembl.org/pub/grch37/release-84/gff3/homo_sapiens/Homo_sapiens.GRCh37.82.gff3.gz
 bedtools sort -i Homo_sapiens.GRCh37.82.gff3.gz \
 | bgzip -c &gt; Homo_sapiens.GRCh37.82.sort.gff3.gz
 tabix Homo_sapiens.GRCh37.82.sort.gff3.gz
@@ -173,7 +156,7 @@ curl http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz \
 </code></pre></div></div>
 
 <p>Make the image:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samplot/src/samplot.py \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samplot/src/samplot.py \
     -c chr4 \
     -s 115928730 \
     -e 115931875 \
@@ -251,24 +234,43 @@ reviewing the SVS, then check out SV-plaudit (
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Layer Lab</h2>
-
     <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
+      <!-- First column with Layer Lab title -->
+      <div class="footer-col">
+        <p class="p-name">Layer Lab</p>
         <ul class="contact-list">
-          <li class="p-name">Layer Lab</li><li><a class="u-email" href="mailto:web@layerlab.org">web@layerlab.org</a></li></ul>
+          <li class="p-name">Layer Lab</li>
+          <li><a class="u-email" href="mailto:"></a></li>
+        </ul>
       </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">ryanlayer</span></a></li><li><a href="https://www.twitter.com/ryanlayer"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">ryanlayer</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Developing algorithms for large-scale genomics at CU Boulder Computer Science and Biofrontiers Institute. Make science faster.</p>
+      
+      <!-- Second column with social links and description -->
+      <div class="footer-col">
+        <ul class="social-links">
+          <li>
+            <a href="https://github.com/ryanlayer">
+              <svg class="svg-icon">
+                <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+              </svg>
+              <span>ryanlayer</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/ryanlayer">
+              <svg class="svg-icon">
+                <use xlink:href="/assets/minima-social-icons.svg#twitter"></use>
+              </svg>
+              <span>ryanlayer</span>
+            </a>
+          </li>
+        </ul>
+        <p>Developing algorithms for large-scale genomics at CU Boulder Computer
+  Science and Biofrontiers Institute. Make science faster.
+</p>
       </div>
     </div>
 
   </div>
-
 </footer>
 </body>
 
