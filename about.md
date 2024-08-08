@@ -6,7 +6,7 @@ permalink: /about/
 
 ![Boulder](/assets/boulder_2.jpg)
 
-The Layer Lab is computational genomics (i.e., dry) research group in the
+The Layer  Lab is computational genomics (i.e., dry) research group in the
 [Department of Computer Science](https://www.colorado.edu/cs/) and the
 [Biofrontiers Institue](https://www.colorado.edu/biofrontiers/) at the 
 [University of Colorado](https://www.colorado.edu/), 
