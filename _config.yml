@@ -2,7 +2,7 @@ title: Layer Lab
 author:
   name: Layer Lab
   email: web@layerlab.org
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/layerlabtest" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 twitter_username: ryanlayer
